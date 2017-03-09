@@ -2,25 +2,42 @@
 #
 # This script will work on Ubuntu 16.10, 16.04, 14.04
 # Other distributions are not tested
-# 
 #
-# Sources: 
+# BUGS: https://github.com/nsotnikov/my-first-minutes-on-ubuntu-for-docker/issues
+# COPYRIGHT: (c) 2017 Nikolaj Sotnikov 
+#======================================================================================================================
+# How to run the script:
+#====================================================================================================================== 
+# $ curl -sL https://git.io/vylnt | bash -s \
+#   HOSTNAME="example.org" \
+#   LANG="de_DE.UTF-8" \
+#
+#======================================================================================================================
+# Aviable Variables:
+#======================================================================================================================
+#   HOSTNAME="example.org" \
+#   LANG="de_DE.UTF-8"  \
+#   TIMEZONE="Europe/Berlin"  \
+#   USER="deploy"  \
+#   PASSWORD="my_height_encrypted_password"  \
+#   DIS_ROOT_SSH="Y"  \
+#   INS_DOCKER="Y"  \
+#   SECURITY="Y"  \
+#   CUSTOM="echo hello world!"  \
+#   SSH_KEY="ssh-rsa AAAAB3NzaCug..."  \
+#
+#======================================================================================================================
+# Sources:
+#======================================================================================================================
 # https://github.com/sssmoves/web-init-script/tree/master/setup
 # https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/
 # https://www.digitalocean.com/community/tutorials/how-to-configure-the-linux-firewall-for-docker-swarm-on-ubuntu-16-04
 #
-# Variables:
-# HOSTNAME="example.org" 
-# LANG="de_DE.UTF-8" 
-# TIMEZONE="Europe/Berlin" 
-# USER="deploy" 
-# PASSWORD="my_height_encrypted_password" 
-# DIS_ROOT_SSH="Y" 
-# INS_DOCKER="Y" 
-# SECURITY="Y" 
-# CUSTOM="echo hello world!" 
-# SSH_KEY="ssh-rsa AAAAB3NzaCug..." 
-#
+# Notes:
+# curl -sL https://git.io/vylnt | bash -s -- arg1 arg2
+# bash <( curl -sL https://git.io/vylnt ) arg1 arg2
+
+
 
 clear
 
@@ -36,8 +53,7 @@ if [[ $EUID -ne 0 ]]; then
 	exit
 fi
 
-egrep "^$USER" /etc/passwd >/dev/null
-if [[ $? -eq 0 ]]; then
+if getent passwd $USER > /dev/null 2>&1; then
     echo "User [$USER] is already exists!"
     echo "Please change username and try again."
     echo
@@ -193,9 +209,10 @@ fi
 echo
 echo "Clean up..."
 echo "---------------------------------------------------------------"
-printf "   - clean up install files..."
+printf "   - clean up install files, and history..."
 hide apt-get -y autoremove --purge
 hide apt-get -y clean
+history -c && history -w
 hide rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 printf "done.\n\n"
 
