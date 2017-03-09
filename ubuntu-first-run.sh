@@ -9,6 +9,19 @@
 # https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/
 # https://www.digitalocean.com/community/tutorials/how-to-configure-the-linux-firewall-for-docker-swarm-on-ubuntu-16-04
 #
+# Variables:
+# HOSTNAME="example.org" 
+# LANG="de_DE.UTF-8" 
+# TIMEZONE="Europe/Berlin" 
+# USER="deploy" 
+# PASSWORD="my_height_encrypted_password" 
+# DIS_ROOT_SSH="Y" 
+# INS_DOCKER="Y" 
+# SECURITY="Y" 
+# CUSTOM="echo hello world!" 
+# SSH_KEY="ssh-rsa AAAAB3NzaCug..." 
+#
+
 clear
 
 if [[ ! -e /etc/debian_version ]]; then
@@ -18,9 +31,7 @@ fi
 
 if [[ $EUID -ne 0 ]]; then
 	echo
-	echo "This script must be run as root. Or you can run it with sudo, like:"
-	echo
-	echo "sudo bash $0"
+	echo "This script must be run as root."
 	echo
 	exit
 fi
@@ -28,7 +39,7 @@ fi
 egrep "^$USER" /etc/passwd >/dev/null
 if [[ $? -eq 0 ]]; then
     echo "User [$USER] is already exists!"
-    echo "Please user other username and try again."
+    echo "Please change username and try again."
     echo
 		exit
 fi
@@ -173,6 +184,7 @@ if [[ $INS_DOCKER == [yY] ]]; then
   printf "done.\n"
   printf "   - installind Docker, and enable autostart, pleasse wait..."
   hide apt-get -y --allow-unauthenticated install docker-ce
+  hide groupadd docker
   hide usermod -aG docker $USER
   hide systemctl enable docker
   printf "done.\n"

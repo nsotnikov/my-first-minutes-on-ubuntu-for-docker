@@ -8,18 +8,19 @@ This shell script can do:
   - change hostname, locales and timezone (Variables: HOSTNAME, LANG, TIMEZONE)
   - add new user, public ssh key and enable sudo (Variables: USER, PASSWORD, SSH_KEY)
   - disallow root ssh access (Variable: DIS_ROOT_SSH)
-  - install Docker (Variable: INS_DOCKER)
+  - install Docker, add user to docker group (Variable: INS_DOCKER)
   - setup firewall ufw, update rules and install useful tools like file2ban (Variable: SECURITY)
   - if set run custom command (Variable: CUSTOM)
   - cleanup
 
-Please inspect [the script](https://raw.githubusercontent.com/nsotnikov/my-first-minutes-on-ubuntu-for-docker/master/ubuntu-first-run.sh) before running. 
+Please read [the script](https://raw.githubusercontent.com/nsotnikov/my-first-minutes-on-ubuntu-for-docker/master/ubuntu-first-run.sh) before running. 
 
 ## Get Running
 Run the script, please see the possible option to use below.    
 Once it ends, please try to login with your ssh key and [disable password](#disable-user-ssh-passwrod-login).   
 
 ```sh
+curl -sL https://git.io/vylnt | bash -s -- \
 HOSTNAME="example.org" \
 LANG="de_DE.UTF-8" \
 TIMEZONE="Europe/Berlin" \
@@ -29,17 +30,15 @@ DIS_ROOT_SSH="Y" \
 INS_DOCKER="Y" \
 SECURITY="Y" \
 CUSTOM="echo hello world!" \
-SSH_KEY="ssh-rsa AAAAB3NzaCug..." \
-sh <(curl -sL https://git.io/vylnt)
-
+SSH_KEY="ssh-rsa AAAAB3NzaCug..." 
 ```
 
-If you dont not need to change/install some feature just leave the variables.     
-An example to change the hostname and run custom command:
+If you dont not need to change/install some feature just skip the variables.     
+An example to change only the hostname and run custom command:
 ```sh
+curl -sL https://git.io/vylnt | bash -s -- \
 HOSTNAME="example.org" \
-CUSTOM="apt-get install -y apache" \
-sh <(curl -sL https://git.io/vylnt)
+CUSTOM="apt-get install -y apache" 
 ```
 ## Disable user ssh passwrod login
 Login to the server as new user with your ssh key!    
