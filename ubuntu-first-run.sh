@@ -32,6 +32,7 @@
 # https://github.com/sssmoves/web-init-script/tree/master/setup
 # https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/
 # https://www.digitalocean.com/community/tutorials/how-to-configure-the-linux-firewall-for-docker-swarm-on-ubuntu-16-04
+# https://github.com/saltstack/salt-bootstrap
 #
 # Notes:
 # curl -sL https://git.io/vylnt | bash -s -- arg1 arg2
@@ -53,11 +54,12 @@ if [[ $EUID -ne 0 ]]; then
 	exit
 fi
 
-if getent passwd $USER > /dev/null 2>&1; then
+#if getent passwd $USER > /dev/null 2>&1; then
+if id $USER >/dev/null 2>&1; then
     echo "User [$USER] is already exists!"
     echo "Please change username and try again."
     echo
-		exit
+    exit
 fi
 
 function hide {

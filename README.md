@@ -16,8 +16,8 @@ This shell script can do:
 Please read [the script](https://raw.githubusercontent.com/nsotnikov/my-first-minutes-on-ubuntu-for-docker/master/ubuntu-first-run.sh) before running. 
 
 ## Get Running
-Run the script, please see the possible option to use below.    
-Once it ends, please try to login with your ssh key and [disable password](#disable-user-ssh-passwrod-login).   
+1. Run the script, please see the possible [options](#options).  to use below.    
+2. Once it ends, please try to login with your ssh key and if succesfull then [disable password](#disable-user-ssh-password-login).   
 
 ```sh
 curl -sL https://git.io/vylnt | bash -s -- \
@@ -40,7 +40,32 @@ curl -sL https://git.io/vylnt | bash -s -- \
 HOSTNAME="example.org" \
 CUSTOM="apt-get install -y apache" 
 ```
-## Disable user ssh passwrod login
+## Options
+Set the hostname of you server:
+HOSTNAME="example.org" \
+
+Set language and timezone:
+LANG="de_DE.UTF-8" \
+TIMEZONE="Europe/Berlin" \
+
+Add new user, set password and add ssh key:
+USER="deploy" \
+PASSWORD="my_height_encrypted_password" \
+SSH_KEY="ssh-rsa AAAAB3NzaCug..." 
+
+Disable ssh login for root:
+DIS_ROOT_SSH="Y" \
+
+Install docker:
+INS_DOCKER="Y" \
+
+Imrove security:
+SECURITY="Y" \
+
+Any custom command:
+CUSTOM="echo hello world!" \
+
+## Disable user ssh password login
 Login to the server as new user with your ssh key!    
 If the key authentication was succesfull, please disable password for the new user. 
  
