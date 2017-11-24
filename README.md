@@ -1,4 +1,4 @@
-# My first minutes on a Ubuntu server to prepare for Docker
+# My first minutes on a Ubuntu server to secure and prepare for Docker
 
 Simple unix shell script to improve the security of your Ubuntu server and install Docker.    
 
