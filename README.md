@@ -1,4 +1,6 @@
 # My first minutes on a Ubuntu server to secure and prepare for Docker
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftikkerei%2Fvps-first-run.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftikkerei%2Fvps-first-run?ref=badge_shield)
+
 
 Simple unix shell script to improve the security of your Ubuntu server and install Docker.    
 
@@ -93,3 +95,6 @@ Nikolaj Sotnikov - [nsotnikov@gmail.com](mailto:nsotnikov@gmail.com)
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftikkerei%2Fvps-first-run.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftikkerei%2Fvps-first-run?ref=badge_large)
